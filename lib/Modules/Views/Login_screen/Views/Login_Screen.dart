@@ -21,8 +21,7 @@ class LoginScreen extends StatelessWidget {
                 width: 500,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "https://i.pinimg.com/originals/aa/29/c3/aa29c30acb037c359bff34f60f6fb0df.gif"),
+                        image: AssetImage("lib/Modules/Assets/Images/Login.gif"),
                         fit: BoxFit.cover)),
               ),
               Padding(
@@ -112,8 +111,10 @@ class LoginScreen extends StatelessWidget {
                 height: 40,
                 width: 150,
                 decoration: BoxDecoration(
-                  color: Colors.redAccent,
+
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(image: AssetImage("lib/Modules/Assets/Images/googlelogin.png"),fit: BoxFit.cover),
                 ),
               ),
             ],
