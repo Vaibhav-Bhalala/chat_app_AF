@@ -167,7 +167,7 @@ class LoginScreen extends StatelessWidget {
                         image: DecorationImage(
                             image: AssetImage(
                                 "lib/Modules/Assets/Images/create-apple-google-signin-buttons-quick-dirty-way-google.png"),
-                            fit: BoxFit.fitWidth),
+                            fit: BoxFit.cover),
                       ),
                     ),
                   ),

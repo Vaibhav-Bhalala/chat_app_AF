@@ -38,6 +38,10 @@ dependencies:
   get:
   firebase_core:
   firebase_auth:
+  cloud_firestore:
+  google_sign_in:
+  shared_preferences:
+  introduction_screen:
 
 dev_dependencies:
   flutter_test:
