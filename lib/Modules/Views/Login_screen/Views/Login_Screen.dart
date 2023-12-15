@@ -1,176 +1,244 @@
+import 'package:chat_app/Modules/Helpers/Authentication_Helper/auth_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../../../Globals/global.dart';
+import '../Model/SignIn_model/signin_model.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Login Screen"),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: SingleChildScrollView(
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  alignment: Alignment.center,
-                  height: 300,
-                  width: 500,
+                  height: h * .35,
+                  width: w,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image:
-                              AssetImage("lib/Modules/Assets/Images/Login.gif"),
-                          fit: BoxFit.cover)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: "Enter Email",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "lib/Modules/Assets/Images/Login.gif",
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: "Enter Password",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 5),
-                        color: Colors.grey,
-                        blurRadius: 5,
-                      )
-                    ]),
-                    child: Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.purple,
-                        borderRadius: BorderRadius.circular(8),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return "Enter Valid Email";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: Global.email_c,
+                        onSaved: (val) {
+                          Global.email = val!;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.mail),
+                          hintText: "Enter Email",
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                      child: Center(
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return "Enter Valid Password";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: Global.pass_c,
+                        onSaved: (val) {
+                          Global.pass = val!;
+                        },
+                        obscureText: Global.show,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.remove_red_eye),
+                          hintText: "Enter Password",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+
+                            SignIn singIn = SignIn(
+                              email: Global.email!,
+                              password: Global.pass!,
+                            );
+
+                            Map<String, dynamic> res = await Auth_helper
+                                .auth_helper
+                                .signIn(data: singIn);
+
+                            if (res['user'] != null) {
+                              Get.offNamedUntil('/home', (routes) => false);
+                            } else if (res['error'] != null) {
+                              Get.snackbar("Flutter Chat App", "Login Failed");
+                            }
+
+                            Global.email_c.clear();
+                            Global.pass_c.clear();
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Sign in",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "or continue with",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        Map? res =
+                            await Auth_helper.auth_helper.signInWithGoogle();
+
+                        if (res['user'] != null) {
+                          Get.offNamedUntil('/tab', (routes) => false);
+                        } else if (res['error'] != null) {
+                          Get.snackbar("Flutter Chat App", "Login Failed");
+                        }
+                      },
+                      child: Ink(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                "lib/Modules/Assets/Images/annoymous.png",
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 5),
-                        color: Colors.grey,
-                        blurRadius: 5,
-                      )
-                    ]),
-                    child: Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Annoymous",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                    InkWell(
+                      onTap: () async {
+                        Map? res =
+                            await Auth_helper.auth_helper.AnnoynimousLogin();
+
+                        if (res['user'] == null) {
+                          Get.snackbar("Chat App", "Login Failed");
+                        } else {
+                          Get.offNamedUntil('/home', (routes) => false);
+                        }
+                      },
+                      child: Ink(
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                "lib/Modules/Assets/Images/google.png",
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 5),
+                const Divider(),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account? ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
                         color: Colors.grey,
-                        blurRadius: 5,
-                      )
-                    ]),
-                    child: Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.grey),
-                        color: Colors.pink.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Center(
-                        child: Text(
-                          "Sign up",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/signup');
+                      },
+                      child: const Text(
+                        "Sign up",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 5),
-                        color: Colors.grey,
-                        blurRadius: 5,
-                      )
-                    ]),
-                    child: Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: AssetImage(
-                                "lib/Modules/Assets/Images/create-apple-google-signin-buttons-quick-dirty-way-google.png"),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
+                  ],
                 ),
               ],
             ),
