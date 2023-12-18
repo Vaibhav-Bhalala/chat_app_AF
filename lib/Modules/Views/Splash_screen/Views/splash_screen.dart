@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("lib/Modules/Assets/Images/splash_gif.gif"),
+                image:
+                    AssetImage("lib/Modules/Assets/Images/splash_screen.gif"),
                 fit: BoxFit.cover),
           ),
         ),
