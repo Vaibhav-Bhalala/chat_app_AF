@@ -171,7 +171,7 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             image: const DecorationImage(
                               image: AssetImage(
-                                "lib/Modules/Assets/Images/annoymous.png",
+                                "lib/Modules/Assets/Images/google.png",
                               ),
                             ),
                           ),
@@ -198,7 +198,7 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             image: const DecorationImage(
                               image: AssetImage(
-                                "lib/Modules/Assets/Images/google.png",
+                                "lib/Modules/Assets/Images/annoymous.png",
                               ),
                             ),
                           ),

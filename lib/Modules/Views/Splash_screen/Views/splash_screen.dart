@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(
-          seconds: 3,
+          seconds: 5,
         ), () {
       Get.offAllNamed('/');
     });
@@ -27,20 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 300,
-              width: 300,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: AssetImage("lib/Modules/Assets/Images/chatting.png"),
-                    fit: BoxFit.cover),
-              ),
-            ),
-          ],
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("lib/Modules/Assets/Images/splash_gif.gif"),
+                fit: BoxFit.cover),
+          ),
         ),
       ),
     );
