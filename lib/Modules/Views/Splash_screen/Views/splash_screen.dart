@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             SizedBox(
-              height: 25,
+              height: 35,
             ),
             Text(
               "Let's Chat",
