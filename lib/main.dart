@@ -28,7 +28,7 @@ void main() async {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: Colors.purpleAccent,
             selectedIconTheme: IconThemeData(color: Colors.redAccent))),
-    initialRoute: '/intro',
+    initialRoute: (isVisitOnce == true) ? '/splash' : '/intro',
     getPages: [
       GetPage(
         name: '/',
