@@ -54,7 +54,7 @@ class Auth_helper {
             : userCredential.user?.displayName,
         "email": userCredential.user?.email,
         "photo": (userCredential.user?.photoURL == null)
-            ? "https://img.freepik.com/premium-photo/panda-suit-tie-with-cup-coffee-generative-ai_634053-4050.jpg"
+            ? "https://simg.nicepng.com/png/small/853-8534448_cartoon-suit-and-tie.png"
             : userCredential.user?.photoURL,
         "uid": userCredential.user?.uid,
       });

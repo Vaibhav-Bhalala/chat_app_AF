@@ -1,5 +1,5 @@
 import 'package:chat_app/Modules/Views/Home_Screen/View/Pages/chat_tab.dart';
-import 'package:chat_app/Modules/Views/Home_Screen/View/Pages/updates_tab.dart';
+import 'package:chat_app/Modules/Views/Home_Screen/View/Pages/people_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/navigation_controller.dart';
@@ -13,7 +13,7 @@ class Home_Screen extends StatelessWidget {
     NavigationController data = Get.put(NavigationController());
     List<Widget> PageList = [
       chats(),
-      updates(),
+      people(),
       settings(),
     ];
     return Scaffold(
@@ -29,8 +29,8 @@ class Home_Screen extends StatelessWidget {
               label: "Chats",
             ),
             NavigationDestination(
-              icon: Icon(Icons.wifi_tethering_error_rounded_sharp),
-              label: "Updates",
+              icon: Icon(Icons.people),
+              label: "People",
             ),
             NavigationDestination(
               icon: Icon(Icons.settings_outlined),

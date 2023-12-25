@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../../Helpers/Authentication_Helper/auth_helper.dart';
 
 class settings extends StatelessWidget {
@@ -24,8 +23,8 @@ class settings extends StatelessWidget {
                           null)
                       ? const CircleAvatar(
                           radius: 40,
-                          foregroundImage: NetworkImage(
-                            "https://img.freepik.com/premium-photo/panda-suit-tie-with-cup-coffee-generative-ai_634053-4050.jpg",
+                          foregroundImage: AssetImage(
+                            "lib/Modules/Assets/Images/default_image.png",
                           ),
                         )
                       : CircleAvatar(
@@ -88,7 +87,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.key,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -101,20 +100,21 @@ class settings extends StatelessWidget {
                         "Account",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "Security notifications",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -123,7 +123,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.lock,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -136,20 +136,21 @@ class settings extends StatelessWidget {
                         "Privacy",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "Block contact",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -158,7 +159,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.people_alt_outlined,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -171,20 +172,21 @@ class settings extends StatelessWidget {
                         "Avatar",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "Create, edit ,profile photo",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -193,7 +195,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.chat,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -206,20 +208,21 @@ class settings extends StatelessWidget {
                         "Chats",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "Theme, wallpapers, chat history",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -228,7 +231,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.notifications,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -241,20 +244,21 @@ class settings extends StatelessWidget {
                         "Notifications",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
-                        "Mwssage, group & call tones",
+                        "Message, group & call tones",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -263,7 +267,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.storage,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -276,20 +280,21 @@ class settings extends StatelessWidget {
                         "Storage and data",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "Network usage, auto-download",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
               Row(
                 children: [
                   Container(
@@ -298,7 +303,7 @@ class settings extends StatelessWidget {
                     child: const Icon(
                       Icons.language,
                       size: 40,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -311,20 +316,22 @@ class settings extends StatelessWidget {
                         "App Language",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         "English",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 17,
+                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+              Divider(),
+              Divider(),
               GestureDetector(
                 onTap: () {
                   Auth_helper.auth_helper.signOut();
@@ -339,7 +346,7 @@ class settings extends StatelessWidget {
                       child: const Icon(
                         Icons.logout,
                         size: 40,
-                        color: Colors.grey,
+                        color: Colors.red,
                       ),
                     ),
                     SizedBox(
@@ -352,7 +359,7 @@ class settings extends StatelessWidget {
                           "Log Out",
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: 22,
+                            fontSize: 18,
                             color: Colors.red,
                           ),
                         ),
@@ -361,6 +368,7 @@ class settings extends StatelessWidget {
                   ],
                 ),
               ),
+              Divider(),
             ],
           ),
         ),

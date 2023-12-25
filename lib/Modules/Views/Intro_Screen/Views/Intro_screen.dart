@@ -61,8 +61,8 @@ class IntroScreen extends StatelessWidget {
         ],
         done: Text("Done"),
         onDone: () async {
-          // SharedPreferences preferences = await SharedPreferences.getInstance();
-          // preferences.setBool("isIntroVisited", false);
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          preferences.setBool("isIntroVisited", false);
           Get.offAllNamed('/splash');
         },
         next: Text("Next"),

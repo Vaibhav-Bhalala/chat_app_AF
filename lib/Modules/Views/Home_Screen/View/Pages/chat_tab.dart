@@ -24,6 +24,7 @@ class chats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        backgroundColor: Colors.white70.withOpacity(0.80),
         child: Column(
           children: [
             const SizedBox(
@@ -77,20 +78,28 @@ class chats extends StatelessWidget {
                     },
                     child: (controller.imagePickerModel.image == null)
                         ? CircleAvatar(
-                            radius: 80,
-                            foregroundImage: NetworkImage(
-                                "https://xsgames.co/randomusers/assets/images/favicon.png"),
+                            radius: 90,
+                            backgroundColor: Colors.purpleAccent,
+                            child: CircleAvatar(
+                              radius: 80,
+                              foregroundImage: AssetImage(
+                                  "lib/Modules/Assets/Images/default_image.png"),
+                            ),
                           )
                         : GetBuilder<ImagePickerController>(
                             builder: (_) => CircleAvatar(
-                              radius: 80,
-                              foregroundImage:
-                                  FileImage(controller.imagePickerModel.image!),
+                              radius: 90,
+                              backgroundColor: Colors.purpleAccent,
+                              child: CircleAvatar(
+                                radius: 80,
+                                foregroundImage: FileImage(
+                                    controller.imagePickerModel.image!),
+                              ),
                             ),
                           ))
                 : CircleAvatar(
                     radius: 90,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.purpleAccent,
                     child: CircleAvatar(
                       radius: 85,
                       foregroundImage: NetworkImage(
@@ -102,11 +111,20 @@ class chats extends StatelessWidget {
                     null)
                 ? (Auth_helper.auth_helper.firebaseAuth.currentUser?.email ==
                         null)
-                    ? Text("NAME: John Doe")
+                    ? Text(
+                        "NAME: John Doe",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
                     : Text(
-                        "NAME: ${Auth_helper.auth_helper.firebaseAuth.currentUser?.email?.split("@")[0]}")
+                        "NAME: ${Auth_helper.auth_helper.firebaseAuth.currentUser?.email?.split("@")[0]}",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
                 : Text(
-                    "NAME: ${Auth_helper.auth_helper.firebaseAuth.currentUser?.displayName}"),
+                    "NAME: ${Auth_helper.auth_helper.firebaseAuth.currentUser?.displayName}",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
             const Divider(),
             (Auth_helper.auth_helper.firebaseAuth.currentUser?.email == null)
                 ? Text("EMAIL: JohnDoe@gmail.com")
@@ -117,6 +135,7 @@ class chats extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
+        backgroundColor: Colors.purpleAccent.withOpacity(0.20),
         actions: [
           // IconButton(
           //     onPressed: () {
@@ -137,11 +156,18 @@ class chats extends StatelessWidget {
         title: (Auth_helper.auth_helper.firebaseAuth.currentUser?.displayName ==
                 null)
             ? (Auth_helper.auth_helper.firebaseAuth.currentUser?.email == null)
-                ? Text("John Doe")
+                ? Text(
+                    "John Doe",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )
                 : Text(
-                    "${Auth_helper.auth_helper.firebaseAuth.currentUser?.email?.split("@")[0]}")
+                    "${Auth_helper.auth_helper.firebaseAuth.currentUser?.email?.split("@")[0]}",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )
             : Text(
-                "${Auth_helper.auth_helper.firebaseAuth.currentUser?.displayName}"),
+                "${Auth_helper.auth_helper.firebaseAuth.currentUser?.displayName}",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
         centerTitle: true,
       ),
       body: StreamBuilder(
@@ -160,8 +186,9 @@ class chats extends StatelessWidget {
                 itemCount: userData?.length,
                 itemBuilder: (ctx, i) {
                   return Card(
-                      elevation: 3,
+                      elevation: 4,
                       child: ListTile(
+                        tileColor: Colors.white,
                         onTap: () async {
                           Receiver receiver = Receiver(
                               name: userData?[i]['name'],
@@ -177,12 +204,20 @@ class chats extends StatelessWidget {
                               .displayMessage(chatDetails: chatdata);
                           Get.toNamed("/chat", arguments: receiver);
                         },
-                        title: Text("${userData?[i]['name']}"),
+                        title: Text(
+                          "${userData?[i]['name']}",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
                         subtitle: Text("${userData?[i]['email']}"),
                         leading: CircleAvatar(
-                          radius: 30,
-                          foregroundImage:
-                              NetworkImage("${userData?[i]['photo']}"),
+                          radius: 40,
+                          backgroundColor: Colors.purpleAccent,
+                          child: CircleAvatar(
+                            radius: 30,
+                            foregroundImage:
+                                NetworkImage("${userData?[i]['photo']}"),
+                          ),
                         ),
                         trailing: IconButton(
                           onPressed: () {

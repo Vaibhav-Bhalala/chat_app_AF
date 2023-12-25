@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(
-          seconds: 5,
+          seconds: 3,
         ), () {
       Get.offAllNamed('/');
     });
@@ -27,14 +27,31 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("lib/Modules/Assets/Images/splash_gif.gif"),
-                fit: BoxFit.cover),
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 300,
+              width: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: AssetImage("lib/Modules/Assets/Images/chatting.png"),
+                    fit: BoxFit.cover),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Text(
+              "Let's Chat",
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.purpleAccent),
+            )
+          ],
         ),
       ),
     );
